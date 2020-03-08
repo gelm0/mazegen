@@ -1,6 +1,6 @@
 Small python application for generating mazes.
 
-Can currently generate mazes with the following algorithms/
+Can currently generate mazes with the following algorithms.
 
 - Kruskals Algorithm
 
