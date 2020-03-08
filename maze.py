@@ -19,6 +19,7 @@ class corner():
 
     def get_north(self):
         return self.north
+
     def get_west(self):
         return self.west
 
@@ -27,9 +28,9 @@ class corner():
 
     def set_west(self, val):
         self.west = val
+
     def get_index(self):
         return self.index
-
 
 class mazer():
     def __init__(self, height, width):
@@ -129,4 +130,3 @@ class mazer():
                         self.maze[index].set_north(0)
                     ds.union(edgey, edgedy)
         return self.maze
-
