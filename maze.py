@@ -10,7 +10,6 @@ from disjoint import disjoint_set
 def printf(s):
     print(s, end = '')
 
-
 class corner():
     def __init__(self, north, west, index):
         self.north = north
