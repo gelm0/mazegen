@@ -2,12 +2,11 @@ Small python application for generating mazes.
 
 Can currently generate mazes with the following algorihms
 
-    * Kruskals Algorithm
+- Kruskals Algorithm
 
-Usage:
+# Usage
+      from maze import mazer
 
-from maze import mazer
-
-mazer = mazer(10,10)
-maze = mazer.kruskal()
-maze.print()
+      mazer = mazer(10,10)
+      maze = mazer.kruskal()
+      maze.print()
