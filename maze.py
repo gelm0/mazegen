@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Arrays needs to be of size n+1*m+1 in order to house the last row/
 import random
 import copy
 import operator
@@ -10,6 +8,7 @@ from disjoint import disjoint_set
 def printf(s):
     print(s, end = '')
 
+# Helper class that keeps track of our edges
 class corner():
     def __init__(self, north, west, index):
         self.north = north
@@ -68,6 +67,7 @@ class mazer():
             printf(col)
         printf("\n")
 
+    # Prints the current state of the maze
     def print_maze(self, maze):
         rows = [0]*self.width
         cols = [0]*self.width
@@ -96,36 +96,38 @@ class mazer():
             new_index = op(index, self.width)
             return new_index if new_index < self.width - 1 else index - self.width
 
-    # We just copy the "inner" maze to get kruskal to work. So we leave m+1 and
-    # n+1 out of it.
+    # Generates the maze from the Kruskal maze generation algorithm
+    # Choose two nodes that shares a wall vertical or horizontal
+    # if the cells of that set are not in the same set
+    #   remove the wall
+    #   merge the two sets of the nodes
     def kruskal(self):
         tree = copy.copy(self.maze)
         random.shuffle(tree)
         ds = disjoint_set(self.maze)
         for i in range(len(tree) - 1):
             edge = self.maze[tree.pop().get_index()]
-            index = edge.get_index()
-            x = self.get_col(index)
-            y = self.get_row(index)
+            edgeIndex = edge.get_index()
+            x = self.get_col(edgeIndex)
+            y = self.get_row(edgeIndex)
             if x > 0 and x < self.width-1:
-                edgeIndex = self.get_random_edge(index)
-                edgex, edgedx = ds.find(edge), ds.find(self.maze[edgeIndex])
-                #Check if edge is to the right or left of our node
-                if edgex != edgedx:
-                    if edgeIndex > index:
-                        self.maze[edgeIndex].set_west(0)
+                neighIndex = self.get_random_edge(edgeIndex)
+                parentEdge, neighEdge = ds.find(edge), ds.find(self.maze[neighIndex])
+                if parentEdge != neighEdge:
+                    if neighIndex > edgeIndex:
+                        self.maze[neighIndex].set_west(0)
                     else:
-                        self.maze[index].set_west(0)
-                    ds.union(edge, edgedx)
+                        self.maze[edgeIndex].set_west(0)
+                    ds.union(edge, neighEdge)
 
             if y > 0 and y < self.height-1:
-                edgeIndex = self.get_random_edge(index,False)
-                edgey, edgedy = ds.find(edge), ds.find(self.maze[edgeIndex])
-                # Check if our node is above or below our edge
-                if edgey != edgedy:
-                    if edgeIndex > index:
-                        self.maze[edgeIndex].set_north(0)
+                neighIndex = self.get_random_edge(edgeIndex,False)
+                parentEdge, neighEdge = ds.find(edge), ds.find(self.maze[neighIndex])
+                if parentEdge != neighEdge:
+                    if neighIndex > edgeIndex:
+                        self.maze[neighIndex].set_north(0)
                     else:
-                        self.maze[index].set_north(0)
-                    ds.union(edgey, edgedy)
+                        self.maze[edgeIndex].set_north(0)
+                    ds.union(parentEdge, neighEdge)
         return self.maze
+
