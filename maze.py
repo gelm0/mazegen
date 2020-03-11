@@ -30,6 +30,25 @@ class corner():
     def get_index(self):
         return self.index
 
+# Helper class that tracks a node in prim
+class node():
+    def __init__(self, westNorth, south, east):
+        self.node = [westNorth, south, east]
+    
+    def __iter__(self):
+        for n in self.node:
+            yield n
+
+    def get_indexes(self):
+        indexes = []
+        for n in self.node:
+            indexes.append(n.get_index)
+        return indexes
+    
+    def getNode():
+        return self.node;
+
+# Main class for generating a maze based on different algorithms
 class mazer():
     def __init__(self, height, width):
         self.width = width + 1
@@ -37,6 +56,9 @@ class mazer():
         # Initalize the edges that will build the maze
         self.maze = self.pop_maze()
 
+    # Filler function for all mazes. This generates a x*y grid with walls between each node
+    # A node is considered to be a square with the walls being corners in
+    # the following fashion x,y;(left,top) x,y-1;(bottom) x+1,y(right)
     def pop_maze(self):
         sz = self.width*self.height
         self.maze = [None] * sz
@@ -131,3 +153,36 @@ class mazer():
                     ds.union(parentEdge, neighEdge)
         return self.maze
 
+    # Returns the neighbouring nodes of a node
+    def get_neighbours(self, node):
+        indexes = node.get_indexes()
+        x,y = self.get_row(indexes[0]), self.get_col(indexes[0])
+        # Constructing list of x+1,y; x-1,y; x,y+1; x,y-1;
+        # None if we cannot move in that direction
+        neighbours = [None, None, None, None] 
+
+        # We can move right
+        if x >= 1 && x < self.width - 1:
+            neighbours[0] = node(indexes[2], indexes[2] + self.width, indexes[2] + 1), 
+        # We can move left
+        if x > 1 && x <= self.width - 1:
+            neighbours[1] = node(indexes[0] - 1, indexes[0] + self.width, indexes[0]), 
+        # We can move up
+        if y > 1 && y <= self.height -1:
+            neighbours[2] = node(indexes[0] - self.width, indexes[0], indexes[0] - self.width + 1)
+        # We can move down 
+        if y >= 1 && y < self.height :
+            neighbours[3] = node(indexes[0] + self.width, indexes[0] + self.width*2 , indexes[0] + self.width + 1)
+
+    
+    def prims(self):
+        tree = copy.copy(self.maze)
+        # We need to starting edges as this is a "node"
+        # We start from the top, can change this later
+        startNode = node(tree[0], tree[self.width], tree[1])
+        wallSet = set(startNode)
+        while (len(wallSet < self.width):
+             
+        print(self.width)
+        print(len(self.maze))
+        return self.maze 
