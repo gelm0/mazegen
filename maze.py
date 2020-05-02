@@ -174,15 +174,3 @@ class mazer():
         if y >= 1 && y < self.height :
             neighbours[3] = node(indexes[0] + self.width, indexes[0] + self.width*2 , indexes[0] + self.width + 1)
 
-    
-    def prims(self):
-        tree = copy.copy(self.maze)
-        # We need to starting edges as this is a "node"
-        # We start from the top, can change this later
-        startNode = node(tree[0], tree[self.width], tree[1])
-        wallSet = set(startNode)
-        while (len(wallSet < self.width):
-             
-        print(self.width)
-        print(len(self.maze))
-        return self.maze 
