@@ -11,11 +11,10 @@ python main.py
 ```
 
 Following arguments are available
-```sh
+
 - **--width** Width of the maze 
 - **--height** Height of the maze 
 - **-v or --verbose** Verbose output 
-```
 
 ### Future implementations
 Implementing the maze generation with Prim and Depth first search
