@@ -1,7 +1,7 @@
 ## Maze generator
 Python application for generating mazes using asciiart
 
-Currently generate mazes with the following algorithms Kruskals algorithm.
+Currently generate mazes with the  Kruskals algorithm.
 
 ### Usage
 
@@ -16,3 +16,6 @@ Following arguments are available
 - **--height** Height of the maze 
 - **-v or --verbose** Verbose output 
 ```
+
+### Future implementations
+Implementing the maze generation with Prim and Depth first search
