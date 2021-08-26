@@ -118,11 +118,13 @@ class mazer():
             new_index = op(index, self.width)
             return new_index if new_index < self.width - 1 else index - self.width
 
-    # Generates the maze from the Kruskal maze generation algorithm
-    # Choose two nodes that shares a wall vertical or horizontal
-    # if the cells of that set are not in the same set
-    #   remove the wall
-    #   merge the two sets of the nodes
+    '''
+    Generates the maze from the Kruskal maze generation algorithm
+
+    Choose two nodes that shares a wall vertical or horizontal
+    if the cells of that set are not in the same set
+    then remove the wall andmerge the two sets
+    '''
     def kruskal(self):
         tree = copy.copy(self.maze)
         random.shuffle(tree)
@@ -141,7 +143,6 @@ class mazer():
                     else:
                         self.maze[edgeIndex].set_west(0)
                     ds.union(edge, neighEdge)
-
             if y > 0 and y < self.height-1:
                 neighIndex = self.get_random_edge(edgeIndex,False)
                 parentEdge, neighEdge = ds.find(edge), ds.find(self.maze[neighIndex])
@@ -162,15 +163,15 @@ class mazer():
         neighbours = [None, None, None, None] 
 
         # We can move right
-        if x >= 1 && x < self.width - 1:
+        if x >= 1 and x < self.width - 1:
             neighbours[0] = node(indexes[2], indexes[2] + self.width, indexes[2] + 1), 
         # We can move left
-        if x > 1 && x <= self.width - 1:
+        if x > 1 and x <= self.width - 1:
             neighbours[1] = node(indexes[0] - 1, indexes[0] + self.width, indexes[0]), 
         # We can move up
-        if y > 1 && y <= self.height -1:
+        if y > 1 and y <= self.height -1:
             neighbours[2] = node(indexes[0] - self.width, indexes[0], indexes[0] - self.width + 1)
         # We can move down 
-        if y >= 1 && y < self.height :
+        if y >= 1 and y < self.height :
             neighbours[3] = node(indexes[0] + self.width, indexes[0] + self.width*2 , indexes[0] + self.width + 1)
 

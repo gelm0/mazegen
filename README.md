@@ -1,12 +1,18 @@
-Small python application for generating mazes.
+## Maze generator
+Python application for generating mazes using asciiart
 
-Can currently generate mazes with the following algorithms.
+Currently generate mazes with the following algorithms Kruskals algorithm.
 
-- Kruskals Algorithm
+### Usage
 
-# Usage
-      from maze import mazer
+Generates a default maze of width 4 and height 4
+```sh
+python main.py
+```
 
-      mazer = mazer(10,10)
-      maze = mazer.kruskal()
-      maze.print()
+Following arguments are available
+```sh
+- **--width** Width of the maze 
+- **--height** Height of the maze 
+- **-v or --verbose** Verbose output 
+```
